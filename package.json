@@ -1,19 +1,20 @@
 {
-  "name": "angular.io-example",
+  "name": "angular.appengine-ssr-template",
   "version": "0.0.0",
   "description": "Example project from an angular.io guide.",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node dist/server/main.js",
+    "start-dev": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev:ssr": "ng run angular.io-example:serve-ssr",
+    "dev:ssr": "ng run angular.appengine-ssr-template:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
-    "build:ssr": "ng build --prod && ng run angular.io-example:server:production",
-    "prerender": "ng run angular.io-example:prerender"
+    "build:ssr": "ng build --prod && ng run angular.appengine-ssr-template:server:production",
+    "prerender": "ng run angular.appengine-ssr-template:prerender"
   },
   "private": true,
   "dependencies": {

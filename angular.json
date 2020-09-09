@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular.io-example": {
+    "angular.appengine-ssr-template": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular.io-example:build"
+            "browserTarget": "angular.appengine-ssr-template:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular.io-example:build:production"
+              "browserTarget": "angular.appengine-ssr-template:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular.io-example:build"
+            "browserTarget": "angular.appengine-ssr-template:build"
           }
         },
         "test": {
@@ -110,11 +110,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular.io-example:serve"
+            "devServerTarget": "angular.appengine-ssr-template:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular.io-example:serve:production"
+              "devServerTarget": "angular.appengine-ssr-template:serve:production"
             }
           }
         },
@@ -142,21 +142,21 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "angular.io-example:build",
-            "serverTarget": "angular.io-example:server"
+            "browserTarget": "angular.appengine-ssr-template:build",
+            "serverTarget": "angular.appengine-ssr-template:server"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular.io-example:build:production",
-              "serverTarget": "angular.io-example:server:production"
+              "browserTarget": "angular.appengine-ssr-template:build:production",
+              "serverTarget": "angular.appengine-ssr-template:server:production"
             }
           }
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "angular.io-example:build:production",
-            "serverTarget": "angular.io-example:server:production",
+            "browserTarget": "angular.appengine-ssr-template:build:production",
+            "serverTarget": "angular.appengine-ssr-template:server:production",
             "routes": [
               "/"
             ]
@@ -168,5 +168,8 @@
       }
     }
   },
-  "defaultProject": "angular.io-example"
+  "defaultProject": "angular.appengine-ssr-template",
+  "cli": {
+    "analytics": "f34286c9-2e83-41c7-bd0c-66b43ca602a7"
+  }
 }

@@ -1,0 +1,2 @@
+gcloud init
+g

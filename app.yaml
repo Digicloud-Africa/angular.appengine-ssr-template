@@ -1,0 +1,14 @@
+env: standard
+runtime: nodejs10
+
+env_variables:
+  MJ_APIKEY_PUBLIC: a1ffa447709d73807b637400cf9e5329
+  MJ_APIKEY_PRIVATE: 79f5895a7ef447f9112d50ef2f4d39dc
+  tmpenv : 'dev'
+
+handlers:
+- url: /.*
+  script: auto
+  secure: always
+  redirect_http_response_code: 301
+  
