@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  projectId: 'dar-portal-dev',
+  keyFilename: "./src/environment/firestore_prod.json",
+  firebase: {
+    apiKey: 'AIzaSyBmthaeWqVC2cdwmQIfrFhfMgScGSWHNLU',
+    authDomain: "dar-portal-dev.firebaseapp.com",
+    databaseURL: "https://dar-portal-dev.firebaseio.com",
+    projectId: "dar-portal-dev",
+    storageBucket: "dar-portal-dev.appspot.com"
+  }
 };
 
 /*
