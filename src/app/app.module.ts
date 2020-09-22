@@ -17,6 +17,8 @@ import { MessagesComponent } from './messages/messages.component';
 
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import {AngularFireModule} from "@angular/fire";
+import {environment} from "../environments/environment";
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { isPlatformBrowser } from '@angular/common';
     BrowserModule.withServerTransition({ appId: 'tour-of-heroes' }),
     FormsModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase)
     // HttpClientModule,
     //
     // // The HttpClientInMemoryWebApiModule module intercepts HTTP requests

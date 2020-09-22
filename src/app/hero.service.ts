@@ -26,7 +26,7 @@ export class HeroService {
   }
 
   /** GET hero by id. Return `undefined` when id not found */
-  getHeroNo404<Data>(id: number): Observable<Hero> {
+  getHeroNo404<Data>(id: string): Observable<Hero> {
     return this.firestore.doc<Hero>("heroes/" +id).valueChanges()
       .pipe(
         map(heroes => heroes[0]), // returns a {0|1} element array
@@ -39,7 +39,7 @@ export class HeroService {
   }
 
   /** GET hero by id. Will 404 if id not found */
-  getHero(id: number): Observable<Hero> {
+  getHero(id: string): Observable<Hero> {
     return this.firestore.doc<Hero>("heroes/" +id).valueChanges().pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
@@ -70,7 +70,7 @@ export class HeroService {
       .add(hero)
       .then(heroRef =>{
         this.log(`added hero w/ id=${heroRef.id}`)
-        return this.getHero(Number.parseInt(heroRef.id));
+        return this.getHero(heroRef.id);
     }).catch(err => {
       catchError(this.handleError<Hero>('addHero'))
     });

@@ -5,13 +5,14 @@
 export const environment = {
   production: false,
   projectId: 'dar-portal-dev',
-  keyFilename: "./src/environment/firestore_prod.json",
   firebase: {
-    apiKey: 'AIzaSyBmthaeWqVC2cdwmQIfrFhfMgScGSWHNLU',
-    authDomain: "dar-portal-dev.firebaseapp.com",
-    databaseURL: "https://dar-portal-dev.firebaseio.com",
-    projectId: "dar-portal-dev",
-    storageBucket: "dar-portal-dev.appspot.com"
+    apiKey: "AIzaSyB_n04U-U0UtNlJcvqYPkzQQ5FSKBB3eQ0",
+    authDomain: "digicloud-ssr-template.firebaseapp.com",
+    databaseURL: "https://digicloud-ssr-template.firebaseio.com",
+    projectId: "digicloud-ssr-template",
+    storageBucket: "digicloud-ssr-template.appspot.com",
+    messagingSenderId: "755594055490",
+    appId: "1:755594055490:web:b9ab8daaa2312b6d45c2db"
   }
 };
 
