@@ -14,10 +14,6 @@ export function app() {
   const distFolder = join(process.cwd(), 'dist/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
-
-  (global as any).WebSocket = require('ws');
-  (global as any).XMLHttpRequest = require('xhr2');
-
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,

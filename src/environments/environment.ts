@@ -3,17 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  projectId: 'dar-portal-dev',
-  firebase: {
-    apiKey: "AIzaSyB_n04U-U0UtNlJcvqYPkzQQ5FSKBB3eQ0",
-    authDomain: "digicloud-ssr-template.firebaseapp.com",
-    databaseURL: "https://digicloud-ssr-template.firebaseio.com",
-    projectId: "digicloud-ssr-template",
-    storageBucket: "digicloud-ssr-template.appspot.com",
-    messagingSenderId: "755594055490",
-    appId: "1:755594055490:web:b9ab8daaa2312b6d45c2db"
-  }
+  production: false
 };
 
 /*

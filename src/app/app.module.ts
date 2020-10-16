@@ -17,8 +17,6 @@ import { MessagesComponent } from './messages/messages.component';
 
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import {AngularFireModule} from "@angular/fire";
-import {environment} from "../environments/environment";
 
 
 @NgModule({
@@ -26,15 +24,14 @@ import {environment} from "../environments/environment";
     BrowserModule.withServerTransition({ appId: 'tour-of-heroes' }),
     FormsModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase)
-    // HttpClientModule,
-    //
-    // // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // // and returns simulated server responses.
-    // // Remove it when a real server is ready to receive requests.
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, { dataEncapsulation: false }
-    // )
+    HttpClientModule,
+
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   declarations: [
     AppComponent,
