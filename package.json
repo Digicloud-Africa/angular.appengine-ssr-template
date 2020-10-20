@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node dist/server/main.js",
+    "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -14,7 +15,8 @@
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build --prod && ng run angular.io-example:server:production",
     "build:protos": "ng build --prod && ng run angular.io-example:protos:production",
-    "prerender": "ng run angular.io-example:prerender"
+    "prerender": "ng run angular.io-example:prerender",
+    "deploy": "gcloud app deploy"
   },
   "private": true,
   "dependencies": {
