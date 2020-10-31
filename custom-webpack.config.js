@@ -11,9 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-const path = require('path');
-
+const webpack = require('webpack')
+const dotenv = require('dotenv')
 module.exports =  {
         entry: './server.ts',
         target: "node",
@@ -40,7 +39,7 @@ module.exports =  {
                         loader: '@zeit/webpack-asset-relocator-loader',
                         options: {
                             // optional, base folder for asset emission (eg assets/name.ext)
-                            //outputAssetBase: '../../protos',
+                            // outputAssetBase: './protos',
                             // optional, restrict asset emissions to only the given folder.
                             filterAssetBase: process.cwd(),
                             // optional, permit entire __dirname emission

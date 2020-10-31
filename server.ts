@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import UserController from "./src/routes/user.controller";
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
@@ -22,18 +23,25 @@ export function app() {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
-  // TODO: implement data requests securely
-  server.get('/api/**', (req, res) => {
-    res.status(404).send('data requests are not yet supported');
+  const userController = new UserController();
+  //
+  // // // TODO: implement data requests securely
+  server.get('/', (req, res)=>{
+    console.log("dealing with api call" + JSON.stringify(req.headers) + '\n******' );
+    res.redirect('/app/');
   });
+
+  //init controllers
+  server.get(userController.routerPath, userController.router);
 
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
   }));
 
+
   // All regular routes use the Universal engine
-  server.get('*', (req, res) => {
+  server.get('/app/**', (req, res) => {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
 

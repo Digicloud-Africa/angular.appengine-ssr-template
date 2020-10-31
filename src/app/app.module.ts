@@ -4,15 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { FirestoreInitService } from './firestore-init.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { HeroesComponent } from './heroes/heroes.component';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UsersComponent } from './users/users.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 import { MessagesComponent } from './messages/messages.component';
 
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
@@ -21,7 +21,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 @NgModule({
   imports: [
-    BrowserModule.withServerTransition({ appId: 'tour-of-heroes' }),
+    BrowserModule.withServerTransition({ appId: 'tour-of-users' }),
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -29,17 +29,17 @@ import { isPlatformBrowser } from '@angular/common';
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    //HttpClientInMemoryWebApiModule.forRoot(
+    //  FirestoreInitService, { dataEncapsulation: false }
+    //)
   ],
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroesComponent,
-    HeroDetailComponent,
+    UsersComponent,
+    UserDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    UserSearchComponent
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,29 +1,29 @@
 import { browser, by, element, ElementArrayFinder, ElementFinder, logging } from 'protractor';
 
-class Hero {
+class User {
   id: number;
   name: string;
 
   // Factory methods
 
-  // Hero from string formatted as '<id> <name>'.
-  static fromString(s: string): Hero {
+  // User from string formatted as '<id> <name>'.
+  static fromString(s: string): User {
     return {
       id: +s.substr(0, s.indexOf(' ')),
       name: s.substr(s.indexOf(' ') + 1),
     };
   }
 
-  // Hero from hero list <li> element.
-  static async fromLi(li: ElementFinder): Promise<Hero> {
+  // User from user list <li> element.
+  static async fromLi(li: ElementFinder): Promise<User> {
     const stringsFromA = await li.all(by.css('a')).getText();
     const strings = stringsFromA[0].split(' ');
     return { id: +strings[0], name: strings[1] };
   }
 
-  // Hero id and name from the given detail element.
-  static async fromDetail(detail: ElementFinder): Promise<Hero> {
-    // Get hero id from the first <div>
+  // User id and name from the given detail element.
+  static async fromDetail(detail: ElementFinder): Promise<User> {
+    // Get user id from the first <div>
     const id = await detail.all(by.css('div')).first().getText();
     // Get name from the h2
     const name = await detail.element(by.css('h2')).getText();
@@ -35,12 +35,12 @@ class Hero {
 }
 
 describe('Universal', () => {
-  const expectedH1 = 'Tour of Heroes';
+  const expectedH1 = 'Tour of Users';
   const expectedTitle = `${expectedH1}`;
-  const targetHero = { id: 15, name: 'Magneta' };
-  const targetHeroDashboardIndex = 3;
+  const targetUser = { id: 15, name: 'Magneta' };
+  const targetUserDashboardIndex = 3;
   const nameSuffix = 'X';
-  const newHeroName = targetHero.name + nameSuffix;
+  const newUserName = targetUser.name + nameSuffix;
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
@@ -60,7 +60,7 @@ describe('Universal', () => {
         expectHeading(1, expectedH1);
     });
 
-    const expectedViewNames = ['Dashboard', 'Heroes'];
+    const expectedViewNames = ['Dashboard', 'Users'];
     it(`has views ${expectedViewNames}`, () => {
       const viewNames = getPageElts().navElts.map((el: ElementFinder) => el.getText());
       expect(viewNames).toEqual(expectedViewNames);
@@ -75,96 +75,96 @@ describe('Universal', () => {
   describe('Dashboard tests', () => {
     beforeAll(() => browser.get(''));
 
-    it('has top heroes', () => {
+    it('has top users', () => {
       const page = getPageElts();
-      expect(page.topHeroes.count()).toEqual(4);
+      expect(page.topUsers.count()).toEqual(4);
     });
 
-    it(`selects and routes to ${targetHero.name} details`, dashboardSelectTargetHero);
+    it(`selects and routes to ${targetUser.name} details`, dashboardSelectTargetUser);
 
-    it(`updates hero name (${newHeroName}) in details view`, updateHeroNameInDetailView);
+    it(`updates user name (${newUserName}) in details view`, updateUserNameInDetailView);
 
-    it(`cancels and shows ${targetHero.name} in Dashboard`, () => {
+    it(`cancels and shows ${targetUser.name} in Dashboard`, () => {
       element(by.buttonText('go back')).click();
       browser.waitForAngular(); // seems necessary to gets tests to pass for toh-pt6
 
-      const targetHeroElt = getPageElts().topHeroes.get(targetHeroDashboardIndex);
-      expect(targetHeroElt.getText()).toEqual(targetHero.name);
+      const targetUserlt = getPageElts().topUsers.get(targetUserDashboardIndex);
+      expect(targetUserlt.getText()).toEqual(targetUser.name);
     });
 
-    it(`selects and routes to ${targetHero.name} details`, dashboardSelectTargetHero);
+    it(`selects and routes to ${targetUser.name} details`, dashboardSelectTargetUser);
 
-    it(`updates hero name (${newHeroName}) in details view`, updateHeroNameInDetailView);
+    it(`updates user name (${newUserName}) in details view`, updateUserNameInDetailView);
 
-    it(`saves and shows ${newHeroName} in Dashboard`, () => {
+    it(`saves and shows ${newUserName} in Dashboard`, () => {
       element(by.buttonText('save')).click();
       browser.waitForAngular(); // seems necessary to gets tests to pass for toh-pt6
 
-      const targetHeroElt = getPageElts().topHeroes.get(targetHeroDashboardIndex);
-      expect(targetHeroElt.getText()).toEqual(newHeroName);
+      const targetUserlt = getPageElts().topUsers.get(targetUserDashboardIndex);
+      expect(targetUserlt.getText()).toEqual(newUserName);
     });
   });
 
-  describe('Heroes tests', () => {
+  describe('Users tests', () => {
     beforeAll(() => browser.get(''));
 
-    it('can switch to Heroes view', () => {
-      getPageElts().appHeroesHref.click();
+    it('can switch to Users view', () => {
+      getPageElts().appUsersHref.click();
       const page = getPageElts();
-      expect(page.appHeroes.isPresent()).toBeTruthy();
-      expect(page.allHeroes.count()).toEqual(10, 'number of heroes');
+      expect(page.appUsers.isPresent()).toBeTruthy();
+      expect(page.allUsers.count()).toEqual(10, 'number of users');
     });
 
-    it('can route to hero details', async () => {
-      getHeroLiEltById(targetHero.id).click();
+    it('can route to user details', async () => {
+      getUserLiEltById(targetUser.id).click();
 
       const page = getPageElts();
-      expect(page.heroDetail.isPresent()).toBeTruthy('shows hero detail');
-      const hero = await Hero.fromDetail(page.heroDetail);
-      expect(hero.id).toEqual(targetHero.id);
-      expect(hero.name).toEqual(targetHero.name.toUpperCase());
+      expect(page.userDetail.isPresent()).toBeTruthy('shows user detail');
+      const user = await User.fromDetail(page.userDetail);
+      expect(user.id).toEqual(targetUser.id);
+      expect(user.name).toEqual(targetUser.name.toUpperCase());
     });
 
-    it(`updates hero name (${newHeroName}) in details view`, updateHeroNameInDetailView);
+    it(`updates user name (${newUserName}) in details view`, updateUserNameInDetailView);
 
-    it(`shows ${newHeroName} in Heroes list`, () => {
+    it(`shows ${newUserName} in Users list`, () => {
       element(by.buttonText('save')).click();
       browser.waitForAngular();
-      const expectedText = `${targetHero.id} ${newHeroName}`;
-      expect(getHeroAEltById(targetHero.id).getText()).toEqual(expectedText);
+      const expectedText = `${targetUser.id} ${newUserName}`;
+      expect(getUserAEltById(targetUser.id).getText()).toEqual(expectedText);
     });
 
-    it(`deletes ${newHeroName} from Heroes list`, async () => {
-      const heroesBefore = await toHeroArray(getPageElts().allHeroes);
-      const li = getHeroLiEltById(targetHero.id);
+    it(`deletes ${newUserName} from Users list`, async () => {
+      const usersBefore = await toUserArray(getPageElts().allUsers);
+      const li = getUserLiEltById(targetUser.id);
       li.element(by.buttonText('x')).click();
 
       const page = getPageElts();
-      expect(page.appHeroes.isPresent()).toBeTruthy();
-      expect(page.allHeroes.count()).toEqual(9, 'number of heroes');
-      const heroesAfter = await toHeroArray(page.allHeroes);
-      // console.log(await Hero.fromLi(page.allHeroes[0]));
-      const expectedHeroes =  heroesBefore.filter(h => h.name !== newHeroName);
-      expect(heroesAfter).toEqual(expectedHeroes);
-      // expect(page.selectedHeroSubview.isPresent()).toBeFalsy();
+      expect(page.appUsers.isPresent()).toBeTruthy();
+      expect(page.allUsers.count()).toEqual(9, 'number of users');
+      const usersAfter = await toUserArray(page.allUsers);
+      // console.log(await User.fromLi(page.allUsers[0]));
+      const expectedUsers =  usersBefore.filter(h => h.name !== newUserName);
+      expect(usersAfter).toEqual(expectedUsers);
+      // expect(page.selectedUserSubview.isPresent()).toBeFalsy();
     });
 
-    it(`adds back ${targetHero.name}`, async () => {
-      const updatedHeroName = 'Alice';
-      const heroesBefore = await toHeroArray(getPageElts().allHeroes);
-      const numHeroes = heroesBefore.length;
+    it(`adds back ${targetUser.name}`, async () => {
+      const updatedUserName = 'Alice';
+      const usersBefore = await toUserArray(getPageElts().allUsers);
+      const numUsers = usersBefore.length;
 
-      element(by.css('input')).sendKeys(updatedHeroName);
+      element(by.css('input')).sendKeys(updatedUserName);
       element(by.buttonText('add')).click();
 
       const page = getPageElts();
-      const heroesAfter = await toHeroArray(page.allHeroes);
-      expect(heroesAfter.length).toEqual(numHeroes + 1, 'number of heroes');
+      const usersAfter = await toUserArray(page.allUsers);
+      expect(usersAfter.length).toEqual(numUsers + 1, 'number of users');
 
-      expect(heroesAfter.slice(0, numHeroes)).toEqual(heroesBefore, 'Old heroes are still there');
+      expect(usersAfter.slice(0, numUsers)).toEqual(usersBefore, 'Old users are still there');
 
-      const maxId = heroesBefore[heroesBefore.length - 1].id;
-      expect(heroesAfter[numHeroes]).toEqual({id: maxId + 1, name: updatedHeroName});
+      const maxId = usersBefore[usersBefore.length - 1].id;
+      expect(usersAfter[numUsers]).toEqual({id: maxId + 1, name: updatedUserName});
     });
 
     it('displays correctly styled buttons', async () => {
@@ -175,7 +175,7 @@ describe('Universal', () => {
           expect(button.getCssValue('border')).toContain('none');
           expect(button.getCssValue('padding')).toBe('5px 10px');
           expect(button.getCssValue('border-radius')).toBe('4px');
-          // Styles defined in heroes.component.css
+          // Styles defined in users.component.css
           expect(button.getCssValue('left')).toBe('194px');
           expect(button.getCssValue('top')).toBe('-32px');
         }
@@ -190,7 +190,7 @@ describe('Universal', () => {
     });
   });
 
-  describe('Progressive hero search', () => {
+  describe('Progressive user search', () => {
     beforeAll(() => browser.get(''));
 
     it(`searches for 'Ma'`, async () => {
@@ -206,44 +206,44 @@ describe('Universal', () => {
       expect(getPageElts().searchResults.count()).toBe(2);
     });
 
-    it(`continues search with 'e' and gets ${targetHero.name}`, async () => {
+    it(`continues search with 'e' and gets ${targetUser.name}`, async () => {
       getPageElts().searchBox.sendKeys('n');
       browser.sleep(1000);
       const page = getPageElts();
       expect(page.searchResults.count()).toBe(1);
-      const hero = page.searchResults.get(0);
-      expect(hero.getText()).toEqual(targetHero.name);
+      const user = page.searchResults.get(0);
+      expect(user.getText()).toEqual(targetUser.name);
     });
 
-    it(`navigates to ${targetHero.name} details view`, async () => {
-      const hero = getPageElts().searchResults.get(0);
-      expect(hero.getText()).toEqual(targetHero.name);
-      hero.click();
+    it(`navigates to ${targetUser.name} details view`, async () => {
+      const user = getPageElts().searchResults.get(0);
+      expect(user.getText()).toEqual(targetUser.name);
+      user.click();
 
       const page = getPageElts();
-      expect(page.heroDetail.isPresent()).toBeTruthy('shows hero detail');
-      const hero2 = await Hero.fromDetail(page.heroDetail);
-      expect(hero2.id).toEqual(targetHero.id);
-      expect(hero2.name).toEqual(targetHero.name.toUpperCase());
+      expect(page.userDetail.isPresent()).toBeTruthy('shows user detail');
+      const user2 = await User.fromDetail(page.userDetail);
+      expect(user2.id).toEqual(targetUser.id);
+      expect(user2.name).toEqual(targetUser.name.toUpperCase());
     });
   });
 
   // Helpers
-  function addToHeroName(text: string): Promise<void> {
+  function addToUserName(text: string): Promise<void> {
     return element(by.css('input')).sendKeys(text) as Promise<void>;
   }
 
-  async function dashboardSelectTargetHero(): Promise<void> {
-    const targetHeroElt = getPageElts().topHeroes.get(targetHeroDashboardIndex);
-    expect(targetHeroElt.getText()).toEqual(targetHero.name);
-    targetHeroElt.click();
+  async function dashboardSelectTargetUser(): Promise<void> {
+    const targetUserlt = getPageElts().topUsers.get(targetUserDashboardIndex);
+    expect(targetUserlt.getText()).toEqual(targetUser.name);
+    targetUserlt.click();
     browser.waitForAngular(); // seems necessary to gets tests to pass for toh-pt6
 
     const page = getPageElts();
-    expect(page.heroDetail.isPresent()).toBeTruthy('shows hero detail');
-    const hero = await Hero.fromDetail(page.heroDetail);
-    expect(hero.id).toEqual(targetHero.id);
-    expect(hero.name).toEqual(targetHero.name.toUpperCase());
+    expect(page.userDetail.isPresent()).toBeTruthy('shows user detail');
+    const user = await User.fromDetail(page.userDetail);
+    expect(user.id).toEqual(targetUser.id);
+    expect(user.name).toEqual(targetUser.name.toUpperCase());
   }
 
   function expectHeading(hLevel: number, expectedText: string): void {
@@ -252,12 +252,12 @@ describe('Universal', () => {
       expect(hText).toEqual(expectedText, hTag);
   }
 
-  function getHeroAEltById(id: number): ElementFinder {
+  function getUserAEltById(id: number): ElementFinder {
     const spanForId = element(by.cssContainingText('li span.badge', id.toString()));
     return spanForId.element(by.xpath('..'));
   }
 
-  function getHeroLiEltById(id: number): ElementFinder {
+  function getUserLiEltById(id: number): ElementFinder {
     const spanForId = element(by.cssContainingText('li span.badge', id.toString()));
     return spanForId.element(by.xpath('../..'));
   }
@@ -270,31 +270,31 @@ describe('Universal', () => {
 
       appDashboardHref: navElts.get(0),
       appDashboard: element(by.css('app-root app-dashboard')),
-      topHeroes: element.all(by.css('app-root app-dashboard > div h4')),
+      topUsers: element.all(by.css('app-root app-dashboard > div h4')),
 
-      appHeroesHref: navElts.get(1),
-      appHeroes: element(by.css('app-root app-heroes')),
-      allHeroes: element.all(by.css('app-root app-heroes li')),
-      selectedHeroSubview: element(by.css('app-root app-heroes > div:last-child')),
+      appUsersHref: navElts.get(1),
+      appUsers: element(by.css('app-root app-users')),
+      allUsers: element.all(by.css('app-root app-users li')),
+      selectedUserSubview: element(by.css('app-root app-users > div:last-child')),
 
-      heroDetail: element(by.css('app-root app-hero-detail > div')),
+      userDetail: element(by.css('app-root app-user-detail > div')),
 
       searchBox: element(by.css('#search-box')),
       searchResults: element.all(by.css('.search-result li'))
     };
   }
 
-  async function toHeroArray(allHeroes: ElementArrayFinder): Promise<Hero[]> {
-    return await allHeroes.map(Hero.fromLi);
+  async function toUserArray(allUsers: ElementArrayFinder): Promise<User[]> {
+    return await allUsers.map(User.fromLi);
   }
 
-  async function updateHeroNameInDetailView(): Promise<void> {
-    // Assumes that the current view is the hero details view.
-    addToHeroName(nameSuffix);
+  async function updateUserNameInDetailView(): Promise<void> {
+    // Assumes that the current view is the user details view.
+    addToUserName(nameSuffix);
 
     const page = getPageElts();
-    const hero = await Hero.fromDetail(page.heroDetail);
-    expect(hero.id).toEqual(targetHero.id);
-    expect(hero.name).toEqual(newHeroName.toUpperCase());
+    const user = await User.fromDetail(page.userDetail);
+    expect(user.id).toEqual(targetUser.id);
+    expect(user.name).toEqual(newUserName.toUpperCase());
   }
 });

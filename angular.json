@@ -15,7 +15,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/browser",
             "index": "src/index.html",
@@ -23,6 +23,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "customWebpackConfig": {
+              "path": "./browser-custom-webpack.config.js",
+              "mergeStrategies": {
+                "externals": "replace"
+              }
+            },
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -154,7 +160,10 @@
             "tsConfig": "tsconfig.server.json",
             "externalDependencies": [
               "@firebase/firestore"
-            ]
+            ],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js"
+            }
           },
           "configurations": {
             "production": {

@@ -3,6 +3,8 @@ import { ServerModule } from '@angular/platform-server';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
+import {FirestoreInitService} from "./firestore-init.service";
+import {AngularFirestore} from "../providers/angular.firestore";
 
 @NgModule({
   imports: [
@@ -11,6 +13,8 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     // Add server-only providers here.
+    FirestoreInitService,
+    AngularFirestore
   ],
   bootstrap: [AppComponent],
 })
