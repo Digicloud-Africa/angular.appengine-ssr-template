@@ -6,7 +6,7 @@ import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
 
-import { User } from '../user';
+import { User } from '../../model/user';
 import { UserService } from '../user.service';
 
 @Component({

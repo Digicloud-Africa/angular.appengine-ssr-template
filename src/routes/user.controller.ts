@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {User} from '../app/user';
+import {User} from '../model/user';
 import {AngularFirestore} from "../providers/angular.firestore";
 
 export default class UserController extends AngularFirestore{
