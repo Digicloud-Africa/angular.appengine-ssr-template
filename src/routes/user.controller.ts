@@ -13,21 +13,21 @@ export default class UserController extends AngularFirestore{
   }
 
   public intializeRoutes() {
-    this.router.get(this.routerPath, this.getAllPosts);
-    this.router.post(this.routerPath, this.createAPost);
+    this.router.get(this.routerPath, this.getAllUsers);
+    this.router.post(this.routerPath, this.createAUser);
   }
 
-  getAllPosts = (request: express.Request, response: express.Response) => {
+  getAllUsers = (request: express.Request, response: express.Response) => {
     console.log(request.headers)
     this.collection<User>(this.dbPath).then(allUsers => {
       console.log(allUsers);
       response.send(allUsers);
-    });
+    }).catch(console.error);
   }
 
-  createAPost = (request: express.Request, response: express.Response) => {
-    const post: User = request.body;
-    response.send(post);
+  createAUser = (request: express.Request, response: express.Response) => {
+    const user: User = request.body;
+    response.send(user);
   }
 }
 

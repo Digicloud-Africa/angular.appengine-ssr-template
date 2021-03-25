@@ -15,13 +15,16 @@ export class AngularFirestore {
   constructor() {
     this.firestore = new Firestore({
       projectId: firestore.project_id,
-      credentials: {client_email: firestore.client_email, private_key: firestore.private_key}
+      credentials: {
+        client_email: firestore.client_email,
+        private_key: firestore.private_key
+      }
     });
     this.userCollection = this.firestore.collection('users');
     console.log('firestore initialised');
   }
 
-  async collection<T>(name: string): Promise<T[]>{
+  async collection<T>(name: string): Promise<T[]> {
     return await this.firestore.collection(name).get().then( (allItems) => {
       return allItems.docs.map<T>(doc => Object.assign(doc.data()));
     });

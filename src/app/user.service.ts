@@ -27,7 +27,7 @@ export class UserService {
     console.log("attempting to get user")
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
-        tap(_ => this.log('fetched heroes')),
+        tap(() => this.log('fetched heroes')),
         catchError(this.handleError<User[]>('getUsers', []))
       );
   }
