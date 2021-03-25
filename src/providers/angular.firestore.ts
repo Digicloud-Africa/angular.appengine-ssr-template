@@ -13,17 +13,10 @@ export class AngularFirestore {
   public userCollection: CollectionReference ;
 
   constructor() {
-    if (!environment.production) {
-      this.firestore = new Firestore({
-        projectId: 'digicloud-ssr-template',
-        credentials: {client_email: firestore.client_email, private_key: firestore.private_key}
-      });
-    } else  {
-      this.firestore = new Firestore({
-        projectId: 'digicloud-ssr-template',
-        credentials: {client_email: firestore.client_email, private_key: firestore.private_key}
-      });
-    }
+    this.firestore = new Firestore({
+      projectId: firestore.project_id,
+      credentials: {client_email: firestore.client_email, private_key: firestore.private_key}
+    });
     this.userCollection = this.firestore.collection('users');
     console.log('firestore initialised');
   }
