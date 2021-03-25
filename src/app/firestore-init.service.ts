@@ -35,7 +35,7 @@ export class FirestoreInitService extends AngularFirestore {
   // the method below returns the initial number (11).
   // if the users array is not empty, the method below returns the highest
   // user id + 1.
-  genId(users: User[]): number {
-    return users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 11;
-  }
+  // static genId(users: User[]): number {
+  //   return users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 11;
+  // }
 }

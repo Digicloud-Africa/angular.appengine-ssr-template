@@ -4,6 +4,7 @@ import { environment } from '../environments/environment';
 import CollectionReference = FirebaseFirestore.CollectionReference;
 import DocumentReference = FirebaseFirestore.DocumentReference;
 import DocumentData = FirebaseFirestore.DocumentData;
+import * as firestore from '../environments/firestore.json';
 
 @Injectable()
 export class AngularFirestore {
@@ -15,12 +16,12 @@ export class AngularFirestore {
     if (!environment.production) {
       this.firestore = new Firestore({
         projectId: 'digicloud-ssr-template',
-        keyFilename: './src/environments/firestore.json'
+        credentials: {client_email: firestore.client_email, private_key: firestore.private_key}
       });
     } else  {
       this.firestore = new Firestore({
         projectId: 'digicloud-ssr-template',
-        keyFilename: './src/environments/firestore.json'
+        credentials: {client_email: firestore.client_email, private_key: firestore.private_key}
       });
     }
     this.userCollection = this.firestore.collection('users');

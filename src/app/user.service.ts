@@ -5,12 +5,13 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../model/user';
 import { MessageService } from './message.service';
 import {Observable, of} from "rxjs";
+import {environment} from "../environments/environment";
 
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private usersUrl = 'http://localhost:4200/api/users/';  // URL to web api
+  private usersUrl = environment.localhost + '/api/users/';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
