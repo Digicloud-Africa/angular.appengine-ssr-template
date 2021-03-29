@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Firestore} from '@google-cloud/firestore';
-import { environment } from '../environments/environment';
 import CollectionReference = FirebaseFirestore.CollectionReference;
 import DocumentReference = FirebaseFirestore.DocumentReference;
 import DocumentData = FirebaseFirestore.DocumentData;
+// @ts-ignore
 import * as firestore from '../environments/firestore.json';
 
 @Injectable()
