@@ -46,8 +46,8 @@
                   "with": "src/environments/environment.prod.ts"
                 },
                 {
-                  "replace": "src/environments/firestore.ts",
-                  "with": "src/environments/firestore.prod.ts"
+                  "replace": "src/environments/firestore.json",
+                  "with": "src/environments/firestore.prod.json"
                 }
               ],
               "optimization": true,
@@ -151,8 +151,8 @@
                   "with": "src/environments/environment.prod.ts"
                 },
                 {
-                  "replace": "src/environments/firestore.ts",
-                  "with": "src/environments/firestore.prod.ts"
+                  "replace": "src/environments/firestore.json",
+                  "with": "src/environments/firestore.prod.json"
                 }
               ],
               "sourceMap": false,
@@ -182,8 +182,8 @@
                   "with": "src/environments/environment.prod.ts"
                 },
                 {
-                  "replace": "src/environments/firestore.ts",
-                  "with": "src/environments/firestore.prod.ts"
+                  "replace": "src/environments/firestore.json",
+                  "with": "src/environments/firestore.prod.json"
                 }
               ],
               "sourceMap": false,
